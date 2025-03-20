@@ -8,6 +8,7 @@ from langchain.chains import RetrievalQA
 from langchain_openai.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 
+# Disabled
 os.environ['OPENAI_API_KEY'] = "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"
 
 def get_text(pdf_file):
