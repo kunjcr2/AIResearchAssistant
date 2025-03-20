@@ -1,22 +1,27 @@
 import streamlit as st
-from reSEARCHINGvONEpointTWO import Assistant
+from reSEARCHINGv1p3 import Assistant
+from io import BytesIO
 
 assistant = Assistant()
 
-data = st.file_uploader("Drop your file here (PDF only)")
+file = st.file_uploader("Drop your file here (PDF only)", accept_multiple_files=False, type=['pdf'])
 
-if data is not None:
+if file is not None:
 
-    summary = "Summary"
-    st.text(f'Summray: {summary}')
+    stream = BytesIO(file.read())
+
+    summary = assistant.get_summary(stream)
+
+    st.text(f'Summray:\n{summary}')
 
     ques = st.chat_input("Enter your question here")
     if ques:
-        st.write(f"Question: {ques}")
+        st.write(f"Question:\n{ques}")
 
-        ans = assistant.ask_llm(ques, "test-1.pdf")
-        context = assistant.getContext(ques, "test-1.pdf")
-        # ans = "Answer"
+        ans = assistant.ask_llm(ques, stream)
         if ans:
-            st.write(f'Context: {context}')
-            st.write(f'Answer: {ans}')
+            st.write(f'Answer:\n{ans}')
+
+        context = assistant.getContext(ques, stream)
+        if context:
+            st.write(f'Context:\n{context}')
