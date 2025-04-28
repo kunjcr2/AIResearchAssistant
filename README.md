@@ -1,7 +1,3 @@
-Here's a **cleaned and professional README** for your project based on the code you gave:
-
----
-
 # 📄 theHelper – AI Research Assistant
 
 > Upload a PDF, get a clean summary, and ask questions based on its content — fast and intelligently.
